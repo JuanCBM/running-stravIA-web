@@ -1,0 +1,94 @@
+<div class="activities-container">
+  <div class="activities-header">
+    <h1>{{ 'ACTIVITIES.TITLE' | translate }}</h1>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>{{ 'ACTIVITIES.LOADING' | translate }}</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && dataSource.data.length === 0" class="no-activities">
+    <p>{{ 'ACTIVITIES.NO_ACTIVITIES' | translate }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error && dataSource.data.length > 0" class="activities-table-container">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'ACTIVITIES.FILTER' | translate }}</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="{{ 'ACTIVITIES.SEARCH_PLACEHOLDER' | translate }}" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort class="activities-table">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACTIVITIES.TABLE.NAME' | translate }} </th>
+        <td mat-cell *matCellDef="let activity"> {{activity.name}} </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACTIVITIES.TABLE.DATE' | translate }} </th>
+        <td mat-cell *matCellDef="let activity"> {{activity.startDate | date:'medium'}} </td>
+      </ng-container>
+
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACTIVITIES.TABLE.TYPE' | translate }} </th>
+        <td mat-cell *matCellDef="let activity">
+          <span [ngClass]="getActivityTypeClass(activity.type)" class="activity-type">
+            {{activity.type}}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Distance Column -->
+      <ng-container matColumnDef="distance">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACTIVITIES.TABLE.DISTANCE' | translate }} </th>
+        <td mat-cell *matCellDef="let activity"> {{activity.distance | distance}} </td>
+      </ng-container>
+
+      <!-- Duration Column -->
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACTIVITIES.TABLE.DURATION' | translate }} </th>
+        <td mat-cell *matCellDef="let activity"> {{activity.duration | duration}} </td>
+      </ng-container>
+
+      <!-- Elevation Column -->
+      <ng-container matColumnDef="elevationGain">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACTIVITIES.TABLE.ELEVATION' | translate }} </th>
+        <td mat-cell *matCellDef="let activity"> {{activity.elevationGain}} m </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="7">{{ 'ACTIVITIES.NO_MATCHING_DATA' | translate:{ '0': input.value } }}</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of activities"></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<header class="app-header">
+  <div class="header-container">
+    <div class="logo">
+      <a routerLink="/">
+        <img src="logo.png" alt="Running StravIA Logo" class="header-logo">
+        <span>{{ 'APP_NAME' | translate }}</span>
+      </a>
+    </div>
+
+    <nav class="nav-menu">
+      <ul>
+        <li *ngIf="authService.isLoggedIn()">
+          <a routerLink="/activities" routerLinkActive="active">{{ 'NAVIGATION.ACTIVITIES' | translate }}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="language-switcher">
+      <button
+        *ngFor="let lang of languages"
+        (click)="switchLanguage(lang.code)"
+        [class.active]="currentLang === lang.code"
+        class="btn btn-language">
+        {{ lang.name | translate }}
+      </button>
+    </div>
+
+    <div class="user-menu">
+      <ng-container *ngIf="authService.isLoggedIn(); else loginButton">
+        <span class="username">{{ authService.getCurrentUser()?.username }}</span>
+        <button class="btn btn-logout" (click)="logout()">{{ 'AUTH.LOGOUT' | translate }}</button>
+      </ng-container>
+
+      <ng-template #loginButton>
+        <a routerLink="/auth/login" class="btn btn-login">{{ 'AUTH.LOGIN' | translate }}</a>
+      </ng-template>
+    </div>
+  </div>
+</header>

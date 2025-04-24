@@ -1,0 +1,103 @@
+.activities-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.activities-header {
+  margin-bottom: 2rem;
+}
+
+.activities-header h1 {
+  color: #333;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loading-spinner p {
+  margin-top: 1rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.no-activities {
+  text-align: center;
+  padding: 2rem;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.activities-table-container {
+  overflow-x: auto;
+}
+
+.activities-table {
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.mat-mdc-row:hover {
+  background-color: #f5f5f5;
+}
+
+.mat-column-select {
+  width: 60px;
+  padding-right: 8px;
+}
+
+.activity-type {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.activity-type-run {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.activity-type-walk {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+}
+
+.activity-type-other {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-paginator {
+  margin-top: 16px;
+}

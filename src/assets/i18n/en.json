@@ -1,0 +1,49 @@
+{
+  "APP_NAME": "Running StravIA",
+  "NAVIGATION": {
+    "ACTIVITIES": "Activities"
+  },
+  "ACTIVITIES": {
+    "TITLE": "Activities",
+    "LOADING": "Loading activities...",
+    "NO_ACTIVITIES": "No activities found",
+    "FILTER": "Filter",
+    "SEARCH_PLACEHOLDER": "Search activities",
+    "NO_MATCHING_DATA": "No data matching the filter \"{0}\"",
+    "TABLE": {
+      "NAME": "Name",
+      "DATE": "Date",
+      "TYPE": "Type",
+      "DISTANCE": "Distance",
+      "DURATION": "Duration",
+      "ELEVATION": "Elevation"
+    },
+    "PAGINATOR": {
+      "ITEMS_PER_PAGE": "Items per page",
+      "NEXT_PAGE": "Next page",
+      "PREVIOUS_PAGE": "Previous page",
+      "FIRST_PAGE": "First page",
+      "LAST_PAGE": "Last page",
+      "OF": "of"
+    }
+  },
+  "AUTH": {
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "LOGIN_TITLE": "Login",
+    "LOGIN_BUTTON": "Login",
+    "LOGIN_FAILED": "Login failed",
+    "USERNAME": "Username",
+    "USERNAME_REQUIRED": "Username is required",
+    "PASSWORD": "Password",
+    "PASSWORD_REQUIRED": "Password is required",
+    "DEMO_INFO": "For demo purposes, use:"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "© 2025 Running StravIA. All rights reserved."
+  },
+  "LANGUAGE": {
+    "ENGLISH": "English",
+    "SPANISH": "Spanish"
+  }
+}
