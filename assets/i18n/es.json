@@ -1,0 +1,52 @@
+{
+  "APP_NAME": "Running StravIA",
+  "NAVIGATION": {
+    "ACTIVITIES": "Actividades"
+  },
+  "ACTIVITIES": {
+    "TITLE": "Actividades",
+    "LOADING": "Cargando actividades...",
+    "NO_ACTIVITIES": "No se encontraron actividades",
+    "FILTER": "Filtrar",
+    "SEARCH_PLACEHOLDER": "Buscar actividades",
+    "NO_MATCHING_DATA": "No hay datos que coincidan con el filtro \"{0}\"",
+    "TABLE": {
+      "NAME": "Nombre",
+      "DATE": "Fecha",
+      "TYPE": "Tipo",
+      "DISTANCE": "Distancia",
+      "DURATION": "Duración",
+      "ELEVATION": "Elevación"
+    },
+    "PAGINATOR": {
+      "ITEMS_PER_PAGE": "Elementos por página",
+      "NEXT_PAGE": "Página siguiente",
+      "PREVIOUS_PAGE": "Página anterior",
+      "FIRST_PAGE": "Primera página",
+      "LAST_PAGE": "Última página",
+      "OF": "de"
+    }
+  },
+  "AUTH": {
+    "LOGIN": "Iniciar sesión",
+    "LOGOUT": "Cerrar sesión",
+    "LOGIN_TITLE": "Iniciar sesión",
+    "LOGIN_BUTTON": "Iniciar sesión",
+    "LOGIN_FAILED": "Error al iniciar sesión",
+    "USERNAME": "Usuario",
+    "USERNAME_REQUIRED": "El usuario es obligatorio",
+    "PASSWORD": "Contraseña",
+    "PASSWORD_REQUIRED": "La contraseña es obligatoria",
+    "DEMO_INFO": "Para fines de demostración, use:",
+    "OR": "O",
+    "LOGIN_WITH_STRAVA": "Iniciar sesión con Strava",
+    "STRAVA_LOGIN_FAILED": "Error al iniciar sesión con Strava"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "© 2025 Running StravIA. Todos los derechos reservados."
+  },
+  "LANGUAGE": {
+    "ENGLISH": "Inglés",
+    "SPANISH": "Español"
+  }
+}
