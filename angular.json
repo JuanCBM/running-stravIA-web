@@ -75,8 +75,7 @@
               "buildTarget": "running-stravIA-web:build:production"
             },
             "development": {
-              "buildTarget": "running-stravIA-web:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "buildTarget": "running-stravIA-web:build:development"
             }
           },
           "defaultConfiguration": "development"
