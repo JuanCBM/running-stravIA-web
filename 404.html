@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Versión optimizada
+    const repoName = 'running-stravIA-web'; // Nombre exacto de tu repositorio
+    const baseHref = `/${repoName}/`;
+    const currentPath = window.location.pathname;
+
+    // Extrae la ruta relativa al repositorio (ej: /running-stravIA-web/auth-success → /auth-success)
+    const appPath = currentPath.split(repoName)[1] || '/';
+
+    sessionStorage.setItem('redirect', appPath + window.location.search);
+    window.location.href = baseHref;
+  </script>
+
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
