@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, EMPTY } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Activity } from '../models/activity.model';
 import { ConfigService } from '../config/config.service';
@@ -21,15 +21,15 @@ export class ActivityService {
     // Check if we have a Strava token
     const stravaToken = localStorage.getItem('auth_token');
 
-    if (stravaToken) {
-      // If we have a Strava token, use it to fetch activities from Strava
-      return this.getStravaActivities();
-    } else if (this.configService.useMockData) {
-      // If no Strava token and using mock data, return mock activities
+    // Check if token is mock-jwt-token or useMockData is active
+    if (stravaToken === 'mock-jwt-token' || this.configService.useMockData) {
+      // If token is mock-jwt-token or using mock data, return mock activities
       return of(MOCK_ACTIVITIES);
+    } else if (stravaToken) {
+      // If we have a real Strava token, use it to fetch activities from Strava
+      return this.getStravaActivities();
     } else {
-      // If no Strava token and not using mock data, fetch from regular API
-      return this.http.get<Activity[]>(`${this.configService.apiUrl}/activities`);
+      return EMPTY;
     }
   }
 
@@ -46,10 +46,10 @@ export class ActivityService {
                 name: item.name,
                 description: item.description || null,
                 distance: item.distance,
-                duration: item.moving_time || item.elapsed_time,
-                startDate: item.start_date,
-                endDate: item.start_date, // Strava might not have end date, use start date
-                elevationGain: item.total_elevation_gain || 0,
+                duration: item.duration,
+                startDate: item.startDate,
+                endDate: item.endDate,
+                elevationGain: item.elevationGain,
                 type: item.type
               } as Activity;
             });
@@ -69,7 +69,9 @@ export class ActivityService {
   }
 
   getActivityById(id: string): Observable<Activity | undefined> {
-    if (this.configService.useMockData) {
+    // Check if token is mock-jwt-token or useMockData is active
+    const stravaToken = localStorage.getItem('auth_token');
+    if (stravaToken === 'mock-jwt-token' || this.configService.useMockData) {
       const activity = MOCK_ACTIVITIES.find(a => a.id === id);
       return of(activity);
     } else {

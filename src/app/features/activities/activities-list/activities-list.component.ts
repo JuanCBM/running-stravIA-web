@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { SHARED_IMPORTS } from '../../../shared/shared';
 import { Activity } from '../../../core/models/activity.model';
 import { ActivityService } from '../../../core/services/activity.service';
@@ -10,6 +10,8 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslatePaginatorIntl } from '../../../shared/providers/translate-paginator.provider';
+import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-activities-list',
@@ -25,7 +27,7 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Activity>([]);
   selection = new SelectionModel<Activity>(true, []);
   displayedColumns: string[] = ['select', 'name', 'startDate', 'type', 'distance', 'duration', 'elevationGain'];
-  loading = false;
+  loading = true;
   error = '';
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -37,28 +39,31 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.loadActivities();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
-
   loadActivities(): void {
-    this.loading = true;
-    this.activityService.getActivities()
-      .subscribe({
-        next: (data) => {
-          this.dataSource.data = data;
-          this.loading = false;
-        },
-        error: (error) => {
-          this.error = this.translate.instant('ACTIVITIES.LOAD_ERROR');
-          this.loading = false;
-          console.error('Error loading activities:', error);
-        }
-      });
+    this.activityService.getActivities().subscribe({
+      next: (data) => {
+        this.loading = false;
+        this.dataSource.data = data;
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }, 100);
+      },
+      error: (error) => {
+        this.error = this.translate.instant('ACTIVITIES.LOAD_ERROR');
+        this.loading = false;
+        console.error('Error loading activities:', error);
+      }
+    });
   }
 
   getActivityTypeClass(type: string): string {

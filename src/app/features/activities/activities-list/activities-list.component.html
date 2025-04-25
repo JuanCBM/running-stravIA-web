@@ -89,6 +89,6 @@
       </tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of activities"></mat-paginator>
+    <mat-paginator *ngIf="dataSource.data.length > 0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of activities"></mat-paginator>
   </div>
 </div>
