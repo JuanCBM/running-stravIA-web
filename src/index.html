@@ -14,5 +14,14 @@
 </head>
 <body class="mat-typography">
   <app-root></app-root>
+  <script>
+    // Recupera la ruta almacenada y navega
+    const redirectPath = sessionStorage.getItem('redirect');
+    if (redirectPath) {
+      sessionStorage.removeItem('redirect');
+      window.history.replaceState(null, '', redirectPath);
+    }
+  </script>
+
 </body>
 </html>

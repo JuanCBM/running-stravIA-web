@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/running-stravIA-web/",
             "outputPath": "dist/running-strav-ia-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -25,7 +26,8 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/assets"
+              "src/assets",
+              "src/404.html"
             ],
             "styles": [
               "src/styles.css"
