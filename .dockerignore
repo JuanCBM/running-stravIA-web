@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Build output
+dist
+.angular
+
+# Version control
+.git
+.gitignore
+
+# IDE files
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project
+
+# Environment files (except production)
+# We keep environment.prod.ts as it's needed for the build
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage
