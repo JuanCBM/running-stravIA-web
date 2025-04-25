@@ -64,14 +64,14 @@ The project includes a GitHub Actions workflow that automatically deploys the ap
 
 1. Builds the application with the correct base href for GitHub Pages
 2. Deploys the built application to the gh-pages branch
-3. Makes the application available at `https://[username].github.io/running-stravIA-web/`
+3. Makes the application available at `https://juancbm.github.io/running-stravIA-web/`
 
 To use this automated deployment:
 
 1. Push your changes to the main branch
 2. GitHub Actions will automatically build and deploy the application
 3. Wait a few minutes for the deployment to complete
-4. Access your application at `https://[username].github.io/running-stravIA-web/`
+4. Access your application at `https://juancbm.github.io/running-stravIA-web/`
 
 ### Manual Deployment
 
