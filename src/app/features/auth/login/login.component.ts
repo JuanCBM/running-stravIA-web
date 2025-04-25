@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SHARED_IMPORTS } from '../../../shared/shared';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ConfigService } from '../../../core/config/config.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private configService: ConfigService
   ) {
     // Redirect to home if already logged in
     if (this.authService.isLoggedIn()) {
@@ -76,17 +78,32 @@ export class LoginComponent implements OnInit {
     this.stravaLoading = true;
     this.error = '';
 
-    this.authService.getStravaAuthUrl()
-      .subscribe({
-        next: (url) => {
-          // Redirect to Strava authorization page
-          window.location.href = url;
-        },
-        error: error => {
-          this.error = error.message || this.translate.instant('AUTH.STRAVA_LOGIN_FAILED');
-          this.stravaLoading = false;
-        }
-      });
+    if (this.configService.useMockData) {
+      // Use mock login with default credentials when useMockData is true
+      this.authService.login({ username: 'user', password: 'password' })
+        .subscribe({
+          next: (user) => {
+            this.router.navigate([this.returnUrl]);
+          },
+          error: error => {
+            this.error = error.message || this.translate.instant('AUTH.LOGIN_FAILED');
+            this.stravaLoading = false;
+          }
+        });
+    } else {
+      // Use Strava authentication when useMockData is false
+      this.authService.getStravaAuthUrl()
+        .subscribe({
+          next: (url) => {
+            // Redirect to Strava authorization page
+            window.location.href = url;
+          },
+          error: error => {
+            this.error = error.message || this.translate.instant('AUTH.STRAVA_LOGIN_FAILED');
+            this.stravaLoading = false;
+          }
+        });
+    }
   }
 
 }

@@ -1,6 +1,5 @@
 export const environment = {
   production: false,
   apiUrl: '/api',
-  useMockData: false,
-  useAuthMockData: true
+  useMockData: false
 };

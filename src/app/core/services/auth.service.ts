@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   login(loginRequest: LoginRequest): Observable<User> {
-    if (this.configService.useAuthMockData) {
+    if (this.configService.useMockData) {
       return this.mockLogin(loginRequest);
     } else {
       return this.http.post<LoginResponse>(`${this.configService.apiUrl}/auth/login`, loginRequest)

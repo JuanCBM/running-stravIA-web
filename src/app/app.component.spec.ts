@@ -7,7 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', './assets/images/','.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 describe('AppComponent', () => {
