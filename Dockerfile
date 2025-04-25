@@ -4,15 +4,20 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+# Construimos la aplicación
 RUN npm run build
+# Verificamos el contenido
+RUN ls -la dist/running-strav-ia-web/
 
-# Etapa de producción con Nginx
+# Etapa de producción
 FROM nginx:alpine
-# Copiamos la configuración personalizada de Nginx si es necesaria
+# Eliminamos la configuración por defecto de nginx
+RUN rm -rf /usr/share/nginx/html/*
+# Copiamos nuestra configuración de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Copiamos los archivos compilados de la aplicación
-COPY --from=builder /app/dist/running-strav-ia-web/ /usr/share/nginx/html/
-# Exponemos el puerto 80
+# Copiamos los archivos de la aplicación
+COPY --from=builder /app/dist/running-strav-ia-web/* /usr/share/nginx/html/
+# Verificamos que los archivos se copiaron
+RUN ls -la /usr/share/nginx/html/
 EXPOSE 80
-ENV PORT=80
 CMD ["nginx", "-g", "daemon off;"]
