@@ -1,0 +1,6 @@
+/* Base64 encoded gradient background for running theme */
+.running-background {
+  background: linear-gradient(135deg, #0a2463, #3e92cc);
+  background-size: cover;
+  background-attachment: fixed;
+}

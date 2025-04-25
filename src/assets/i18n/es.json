@@ -37,7 +37,10 @@
     "USERNAME_REQUIRED": "El usuario es obligatorio",
     "PASSWORD": "Contraseña",
     "PASSWORD_REQUIRED": "La contraseña es obligatoria",
-    "DEMO_INFO": "Para fines de demostración, use:"
+    "DEMO_INFO": "Para fines de demostración, use:",
+    "OR": "O",
+    "LOGIN_WITH_STRAVA": "Iniciar sesión con Strava",
+    "STRAVA_LOGIN_FAILED": "Error al iniciar sesión con Strava"
   },
   "FOOTER": {
     "COPYRIGHT": "© 2025 Running StravIA. Todos los derechos reservados."

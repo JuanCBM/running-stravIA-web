@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SHARED_IMPORTS } from '../../../shared/shared';
 import { AuthService } from '../../../core/services/auth.service';
@@ -12,14 +11,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  loginForm: FormGroup;
-  loading = false;
+export class LoginComponent implements OnInit {
+  stravaLoading = false;
   error = '';
   returnUrl = '/activities';
 
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
@@ -30,33 +27,66 @@ export class LoginComponent {
       this.router.navigate(['/activities']);
     }
 
-    this.loginForm = this.formBuilder.group({
-      username: ['user', Validators.required],
-      password: ['password', Validators.required]
-    });
-
     // Get return url from route parameters or default to '/activities'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/activities';
   }
 
-  onSubmit(): void {
-    // Stop if form is invalid
-    if (this.loginForm.invalid) {
-      return;
+  ngOnInit(): void {
+    // Check if we have a code parameter in the URL (Strava callback)
+    const code = this.route.snapshot.queryParams['code'];
+    if (code) {
+      this.handleStravaCallback(code);
     }
 
-    this.loading = true;
+    // Check if we have a token parameter in the URL (auth-success)
+    const token = this.route.snapshot.queryParams['token'];
+    if (token) {
+      this.handleAuthSuccess(token);
+    }
+  }
+
+  handleAuthSuccess(token: string): void {
+    // Store the token
+    localStorage.setItem('auth_token', token);
+
+    // Update the auth service
+    this.authService.loadUserFromStorage();
+
+    // Redirect to activities
+    this.router.navigate(['/activities']);
+  }
+
+  handleStravaCallback(code: string): void {
+    this.stravaLoading = true;
     this.error = '';
 
-    this.authService.login(this.loginForm.value)
+    this.authService.handleStravaCallback(code)
       .subscribe({
         next: () => {
           this.router.navigate([this.returnUrl]);
         },
         error: error => {
-          this.error = error.message || this.translate.instant('AUTH.LOGIN_FAILED');
-          this.loading = false;
+          this.error = error.message || this.translate.instant('AUTH.STRAVA_LOGIN_FAILED');
+          this.stravaLoading = false;
         }
       });
   }
+
+  loginWithStrava(): void {
+    this.stravaLoading = true;
+    this.error = '';
+
+    this.authService.getStravaAuthUrl()
+      .subscribe({
+        next: (url) => {
+          // Redirect to Strava authorization page
+          window.location.href = url;
+        },
+        error: error => {
+          this.error = error.message || this.translate.instant('AUTH.STRAVA_LOGIN_FAILED');
+          this.stravaLoading = false;
+        }
+      });
+  }
+
 }

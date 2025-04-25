@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User, LoginRequest, LoginResponse } from '../models/auth.model';
 import { ConfigService } from '../config/config.service';
 import { MOCK_USERS, VALID_CREDENTIALS, ADMIN_CREDENTIALS } from '../mock/auth.mock';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,14 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private router: Router
   ) {
     // Check if user is already logged in
     this.loadUserFromStorage();
   }
 
-  private loadUserFromStorage(): void {
+  loadUserFromStorage(): void {
     const token = localStorage.getItem(this.tokenKey);
     if (token) {
       try {
@@ -37,7 +39,7 @@ export class AuthService {
   }
 
   login(loginRequest: LoginRequest): Observable<User> {
-    if (this.configService.useMockData) {
+    if (this.configService.useAuthMockData) {
       return this.mockLogin(loginRequest);
     } else {
       return this.http.post<LoginResponse>(`${this.configService.apiUrl}/auth/login`, loginRequest)
@@ -87,5 +89,36 @@ export class AuthService {
 
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  // Strava authentication methods
+  getStravaAuthUrl(): Observable<string> {
+    return this.http.get(`${this.configService.apiUrl}/strava/auth`, { responseType: 'text' });
+  }
+
+  handleStravaCallback(code: string): Observable<any> {
+    // This method will be called when Strava redirects back to our app
+    // The code parameter is provided by Strava in the callback URL
+    return this.http.get<any>(`${this.configService.apiUrl}/strava/callback?code=${code}`)
+      .pipe(
+        tap(response => {
+          if (response.token) {
+            localStorage.setItem('auth_token', response.token);
+            // If we have user info, update the current user
+            if (response.user) {
+              this.currentUserSubject.next(response.user);
+              localStorage.setItem(this.tokenKey, 'strava-auth-token');
+            }
+          }
+        })
+      );
+  }
+
+  getStravaActivities(): Observable<any> {
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      return throwError(() => new Error('No Strava token available'));
+    }
+    return this.http.get<any>(`${this.configService.apiUrl}/strava/activities?token=${token}`);
   }
 }

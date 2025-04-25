@@ -24,4 +24,8 @@ export class ConfigService {
   get useMockData(): boolean {
     return this.config.useMockData;
   }
+
+  get useAuthMockData(): boolean {
+    return this.config.useAuthMockData;
+  }
 }

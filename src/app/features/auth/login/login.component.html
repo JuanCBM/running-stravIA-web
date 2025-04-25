@@ -1,62 +1,32 @@
-<div class="login-container">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <div class="logo-container">
-        <img src="logo.png" alt="Running StravIA Logo" class="login-logo">
-      </div>
-    </mat-card-header>
+<div class="login-container running-background">
+  <div class="login-content">
+    <mat-card class="login-card">
+      <mat-card-header>
+        <div class="logo-container">
+          <img src="logo.png" alt="Running StravIA Logo" class="login-logo">
+        </div>
+      </mat-card-header>
 
-    <mat-card-content>
-      <h2>{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
-
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'AUTH.USERNAME' | translate }}</mat-label>
-          <input
-            matInput
-            formControlName="username"
-            type="text"
-            id="username"
-          />
-          <mat-error *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched">
-            {{ 'AUTH.USERNAME_REQUIRED' | translate }}
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>{{ 'AUTH.PASSWORD' | translate }}</mat-label>
-          <input
-            matInput
-            formControlName="password"
-            type="password"
-            id="password"
-          />
-          <mat-error *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
-            {{ 'AUTH.PASSWORD_REQUIRED' | translate }}
-          </mat-error>
-        </mat-form-field>
+      <mat-card-content>
+        <h1 class="app-title">Running StravIA</h1>
+        <h2 class="login-subtitle">{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
 
         <div class="button-container">
           <button
             mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="loading || loginForm.invalid"
-            class="full-width">
-            <mat-spinner *ngIf="loading" diameter="20" class="spinner-button"></mat-spinner>
-            <span *ngIf="!loading">{{ 'AUTH.LOGIN_BUTTON' | translate }}</span>
+            type="button"
+            [disabled]="stravaLoading"
+            (click)="loginWithStrava()"
+            class="full-width strava-button">
+            <mat-spinner *ngIf="stravaLoading" diameter="20" class="spinner-button"></mat-spinner>
+            <span *ngIf="!stravaLoading">{{ 'AUTH.LOGIN_WITH_STRAVA' | translate }}</span>
           </button>
         </div>
 
         <mat-error *ngIf="error" class="error-message">
           {{ error }}
         </mat-error>
-
-        <div class="demo-info">
-          <p>{{ 'AUTH.DEMO_INFO' | translate }}</p>
-          <p><strong>{{ 'AUTH.USERNAME' | translate }}:</strong> user, <strong>{{ 'AUTH.PASSWORD' | translate }}:</strong> password</p>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

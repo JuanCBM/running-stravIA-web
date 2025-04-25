@@ -23,6 +23,16 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent }
     ]
   },
+  {
+    path: 'strava',
+    children: [
+      { path: 'callback', component: LoginComponent }
+    ]
+  },
+  {
+    path: 'auth-success',
+    component: LoginComponent
+  },
   // Wildcard route for 404
   { path: '**', redirectTo: '' }
 ];
