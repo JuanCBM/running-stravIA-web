@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, EMPTY } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Activity } from '../models/activity.model';
-import { ConfigService } from '../config/config.service';
-import { MOCK_ACTIVITIES } from '../mock/activities.mock';
-import { AuthService } from './auth.service';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {EMPTY, Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {Activity} from '../models/activity.model';
+import {ConfigService} from '../config/config.service';
+import {MOCK_ACTIVITIES} from '../mock/activities.mock';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'

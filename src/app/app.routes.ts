@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
-import { LayoutComponent } from './core/layout/layout/layout.component';
-import { LoginComponent } from './features/auth/login/login.component';
-import { ActivitiesListComponent } from './features/activities/activities-list/activities-list.component';
-import { authGuard } from './core/guards/auth.guard';
+import {Routes} from '@angular/router';
+import {LayoutComponent} from './core/layout/layout/layout.component';
+import {LoginComponent} from './features/auth/login/login.component';
+import {ActivitiesListComponent} from './features/activities/activities-list/activities-list.component';
+import {authGuard} from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {

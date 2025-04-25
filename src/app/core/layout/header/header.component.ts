@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { SHARED_IMPORTS } from '../../../shared/shared';
-import { AuthService } from '../../services/auth.service';
-import { LanguageService } from '../../services/language.service';
-import { TranslateModule } from '@ngx-translate/core';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {SHARED_IMPORTS} from '../../../shared/shared';
+import {AuthService} from '../../services/auth.service';
+import {LanguageService} from '../../services/language.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',

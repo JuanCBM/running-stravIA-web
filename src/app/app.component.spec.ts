@@ -1,9 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideHttpClient } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {HttpClient, provideHttpClient} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

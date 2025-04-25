@@ -1,17 +1,13 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { SHARED_IMPORTS } from '../../../shared/shared';
-import { Activity } from '../../../core/models/activity.model';
-import { ActivityService } from '../../../core/services/activity.service';
-import { DurationPipe } from '../../../shared/pipes/duration.pipe';
-import { DistancePipe } from '../../../shared/pipes/distance.pipe';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { SelectionModel } from '@angular/cdk/collections';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslatePaginatorIntl } from '../../../shared/providers/translate-paginator.provider';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {SHARED_IMPORTS} from '../../../shared/shared';
+import {Activity} from '../../../core/models/activity.model';
+import {ActivityService} from '../../../core/services/activity.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
+import {SelectionModel} from '@angular/cdk/collections';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslatePaginatorIntl} from '../../../shared/providers/translate-paginator.provider';
 
 @Component({
   selector: 'app-activities-list',

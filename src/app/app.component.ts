@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LanguageService } from './core/services/language.service';
+import {Component, OnInit} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {LanguageService} from './core/services/language.service';
 
 @Component({
   selector: 'app-root',

@@ -1,4 +1,4 @@
-import { Activity } from '../models/activity.model';
+import {Activity} from '../models/activity.model';
 
 export const MOCK_ACTIVITIES: Activity[] = [
   {

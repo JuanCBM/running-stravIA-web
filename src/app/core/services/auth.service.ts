@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { User, LoginRequest, LoginResponse } from '../models/auth.model';
-import { ConfigService } from '../config/config.service';
-import { MOCK_USERS, VALID_CREDENTIALS, ADMIN_CREDENTIALS } from '../mock/auth.mock';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
+import {LoginRequest, LoginResponse, User} from '../models/auth.model';
+import {ConfigService} from '../config/config.service';
+import {ADMIN_CREDENTIALS, MOCK_USERS, VALID_CREDENTIALS} from '../mock/auth.mock';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

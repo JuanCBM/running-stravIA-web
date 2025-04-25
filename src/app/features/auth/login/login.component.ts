@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { SHARED_IMPORTS } from '../../../shared/shared';
-import { AuthService } from '../../../core/services/auth.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ConfigService } from '../../../core/config/config.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SHARED_IMPORTS} from '../../../shared/shared';
+import {AuthService} from '../../../core/services/auth.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {ConfigService} from '../../../core/config/config.service';
 
 @Component({
   selector: 'app-login',
