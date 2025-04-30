@@ -24,4 +24,8 @@ export class ConfigService {
   get useMockData(): boolean {
     return this.config.useMockData;
   }
+
+  setUseMockData(useMock:boolean): void  {
+    this.config.useMockData = useMock;
+  }
 }

@@ -39,7 +39,8 @@
     "PASSWORD_REQUIRED": "Password is required",
     "DEMO_INFO": "For demo purposes, use:",
     "OR": "OR",
-    "LOGIN_WITH_STRAVA": "Login with Strava",
+    "LOGIN_WITH_STRAVA": "Login with Strava (In progress)",
+    "LOGIN_WITH_MOCK": "Login",
     "STRAVA_LOGIN_FAILED": "Strava login failed"
   },
   "FOOTER": {

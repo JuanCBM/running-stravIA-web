@@ -106,4 +106,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loginWithMock(): void {
+    this.configService.setUseMockData(true);
+    this.loginWithStrava();
+  }
+
 }
