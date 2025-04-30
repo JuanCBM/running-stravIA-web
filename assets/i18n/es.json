@@ -39,7 +39,8 @@
     "PASSWORD_REQUIRED": "La contraseña es obligatoria",
     "DEMO_INFO": "Para fines de demostración, use:",
     "OR": "O",
-    "LOGIN_WITH_STRAVA": "Iniciar sesión con Strava",
+    "LOGIN_WITH_MOCK": "Iniciar sesión",
+    "LOGIN_WITH_STRAVA": "Iniciar sesión con Strava (En progreso)",
     "STRAVA_LOGIN_FAILED": "Error al iniciar sesión con Strava"
   },
   "FOOTER": {
